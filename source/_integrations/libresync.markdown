@@ -59,7 +59,7 @@ The hub is represented by a media player entity, which provides:
 
 - Playback state, including whether sound is coming out of a physical input.
 - Source selection, from the list of inputs the hub reports.
-- Volume control.
+- Volume control, and mute, simulated with the volume (see [Known limitations](#known-limitations)).
 - Play, pause, stop, next track, and previous track, for content streamed to the hub.
 - The title, artist, album, artwork, duration, and position of the current track.
 
@@ -134,7 +134,7 @@ The hub pushes changes to volume, source, playback state, and track information 
 ## Known limitations
 
 - **No on/off control.** The hub's power button does not switch it off in the usual sense. It stops playback, and the hub switches itself back on as soon as something starts playing. The media player therefore has no on/off control.
-- **No mute control.** The hub has no mute command that works over the network. If the hub is muted with its remote or the vendor's app, Home Assistant shows it as muted.
+- **Mute is simulated.** The hub has no mute command that works over the network, so muting from Home Assistant sets the volume to zero and unmuting restores the previous volume. If the volume is changed in the meantime, unmuting leaves it as it is. A restart of Home Assistant while muted forgets the previous volume. If the hub is muted with its remote or the vendor's app, Home Assistant shows it as muted but cannot unmute it.
 - Seeking, media browsing, speaker grouping, and multiroom are not supported.
 - EQ presets cannot be created or edited, only chosen. Build them in the vendor's app.
 
